@@ -1,0 +1,11 @@
+{
+  "title": "Appswayan — Mobile & Web App Studio",
+  "description": "Building scalable Flutter, Mobile, and Web applications with AI speed.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

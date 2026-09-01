@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Archivo', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-ink: #f7f8fa;
+  --color-ink-2: #eef1f5;
+  --color-panel: #ffffff;
+  --color-line: #e2e6ec;
+  --color-mist: #5b6472;
+  --color-paper: #0b0e13;
+  --color-flutter: #2f8fff;
+  --color-flutter-deep: #1f6fe0;
+  --color-lime: #1f9e57;
+  --color-pop-orange: #ff5a2c;
+  --color-pop-purple: #7b5bff;
+  --color-pop-teal: #14c8b6;
+  --color-hero-box: #e3ecec;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-flutter);
+  color: var(--color-ink);
+}
+
+/* Hide scrollbars until scrolling */
+* {
+  scrollbar-width: none;
+}
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+/* true superellipse (squircle) corners */
+.squircle {
+  border-radius: 9px;
+  corner-shape: squircle;
+}
+@media (min-width: 640px) {
+  .squircle {
+    border-radius: 11px;
+  }
+}
+@media (min-width: 768px) {
+  .squircle {
+    border-radius: 13px;
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.animate-floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
