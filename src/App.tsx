@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import ideaLeft from "./imports/1788170052365_1.png"
 import appsRight from "./imports/1788170052365_2.png"
 import card1Img from "./imports/original-7e13fde445196bf456a9ad6111398f9a.webp"
@@ -7,6 +7,20 @@ import card2Img from "./imports/Group 9304 (1).png"
 import card3Video from "./imports/large-thumbnail20260723-1152397-47uxz4.mp4"
 import logoImg from "./imports/logo.png"
 import pinpointMockup from "./imports/pinpoint-mockup.png"
+import androidSvg from "./imports/ant-design_android-filled.svg"
+import appleSvg from "./imports/ant-design_apple-filled.svg"
+import webSvg from "./imports/streamline-plump_web.svg"
+import phoneSvg from "./imports/bi_phone.svg"
+import mailSvg from "./imports/codicon_mail.svg"
+import locationSvg from "./imports/basil_location-outline.svg"
+import linkedinSvg from "./imports/circum_linkedin.svg"
+import twitterSvg from "./imports/codicon_twitter.svg"
+import instaSvg from "./imports/lets-icons_insta-light.svg"
+import behanceSvg from "./imports/basil_behance-outline.svg"
+import pinterestSvg from "./imports/ant-design_pinterest-outlined.svg"
+import redditSvg from "./imports/ion_logo-reddit.svg"
+import { CASE_STUDIES } from "./data/caseStudiesData"
+import ProjectDetailPageTemplate from "./components/ProjectDetailPageTemplate"
 
 /* ---------- shared bits ---------- */
 
@@ -19,7 +33,7 @@ function Tag({ children }: { children: React.ReactNode }) {
   )
 }
 
-function SectionLabel({ index, title }: { index: string title: string }) {
+function SectionLabel({ index, title }: { index: string; title: string }) {
   return (
     <div className="flex items-baseline gap-4 border-b border-line pb-4">
       <span className="font-mono text-xs text-mist">{index}</span>
@@ -90,31 +104,157 @@ const NAV = [
   { label: "Contact", href: "#contact", id: "contact" },
 ]
 
-function Logo() {
+function Logo({ loop = true, className = "" }: { loop?: boolean; className?: string }) {
+  const [cycleKey, setCycleKey] = useState(0)
+
+  const handleNextCycle = useCallback(() => {
+    setCycleKey((k) => k + 1)
+  }, [])
+
+  return (
+    <div className={`w-[175px] sm:w-[210px] xl:w-[225px] h-8 sm:h-10 xl:h-11 flex items-center justify-center shrink-0 ${className}`}>
+      <LogoInstance key={cycleKey} loop={loop} onCycleEnd={handleNextCycle} />
+    </div>
+  )
+}
+
+function LogoInstance({ loop, onCycleEnd }: { loop: boolean; onCycleEnd: () => void }) {
+  const [step, setStep] = useState<0 | 1 | 2>(0)
+  const [opacity, setOpacity] = useState(0)
+
+  useEffect(() => {
+    // 1. Smoothly fade in the single starting image (0 -> 100% over 500ms)
+    const t0 = setTimeout(() => {
+      setOpacity(1)
+    }, 40)
+
+    // 2. Double & rotate to opposite sides in place (Step 1) at 750ms
+    const t1 = setTimeout(() => {
+      setStep(1)
+    }, 750)
+
+    // 3. Move apart & reveal text (Step 2) at 1500ms
+    const t2 = setTimeout(() => {
+      setStep(2)
+    }, 1500)
+
+    let t3: ReturnType<typeof setTimeout>
+    let t4: ReturnType<typeof setTimeout>
+
+    if (loop) {
+      // 4. Hold completed logo lockup for 10 seconds, then smoothly fade out (11500ms)
+      t3 = setTimeout(() => {
+        setOpacity(0)
+      }, 11500)
+
+      // 5. Once fully hidden at 12150ms, trigger next cycle with smooth fade-in
+      t4 = setTimeout(() => {
+        onCycleEnd()
+      }, 12150)
+    }
+
+    return () => {
+      clearTimeout(t0)
+      clearTimeout(t1)
+      clearTimeout(t2)
+      if (t3) clearTimeout(t3)
+      if (t4) clearTimeout(t4)
+    }
+  }, [loop, onCycleEnd])
+
   return (
     <a
       href="#top"
       aria-label="Appswayan Home"
-      className="group inline-flex flex-row items-center gap-1 sm:gap-1.5 p-0 shrink-0"
+      className={`group inline-flex flex-row items-center justify-center p-0 shrink-0 select-none transition-opacity duration-600 ease-in-out ${
+        opacity === 0 ? "opacity-0 pointer-events-none" : "opacity-100"
+      }`}
     >
-      {/* Left Logo (Rotated Left Once) */}
-      <img
-        src={logoImg}
-        alt="Logo Left"
-        className="h-9 w-9 sm:h-11 sm:w-11 xl:h-12 xl:w-12 select-none object-contain -rotate-90 transition-transform group-hover:scale-110"
-      />
+      <div className="relative inline-flex items-center justify-center">
+        {/* Left / Base Logo: Rotates to -90deg in place */}
+        <div
+          className={`flex items-center justify-center shrink-0 transition-all duration-700 ease-out z-10 ${
+            step === 0
+              ? "rotate-0"
+              : "-rotate-90 group-hover:scale-110"
+          }`}
+        >
+          <img
+            src={logoImg}
+            alt="Logo Left"
+            className="h-8 w-8 sm:h-10 sm:w-10 xl:h-11 xl:w-11 select-none object-contain"
+          />
+        </div>
 
-      {/* Center Brand Text */}
-      <span className="p-0 font-display text-xs sm:text-sm xl:text-base font-bold tracking-[0.16em] sm:tracking-[0.2em] text-paper whitespace-nowrap transition-colors group-hover:text-flutter sm:font-extrabold">
-        APPSWAYAN
-      </span>
+        {/* Center Gap & Brand Text: Expands only in step 2 */}
+        <div
+          className={`overflow-hidden transition-all duration-700 ease-out flex items-center justify-center ${
+            step < 2
+              ? "max-w-0 opacity-0 px-0"
+              : "max-w-[220px] opacity-100 px-1 sm:px-1.5"
+          }`}
+        >
+          <span className="p-0 font-display text-xs sm:text-sm xl:text-base font-bold tracking-[0.16em] sm:tracking-[0.2em] text-paper whitespace-nowrap transition-colors group-hover:text-flutter sm:font-extrabold">
+            APPSWAYAN
+          </span>
+        </div>
 
-      {/* Right Logo (Rotated Right Once) */}
-      <img
-        src={logoImg}
-        alt="Logo Right"
-        className="h-9 w-9 sm:h-11 sm:w-11 xl:h-12 xl:w-12 select-none object-contain rotate-90 transition-transform group-hover:scale-110"
-      />
+        {/* Right / Duplicate Logo: In step 0 & 1 stays stacked in exact same spot rotating to +90deg, in step 2 moves right */}
+        <div
+          className={`flex items-center justify-center shrink-0 transition-all duration-700 ease-out ${
+            step < 2
+              ? "absolute inset-0 pointer-events-none z-20"
+              : "relative z-10"
+          }`}
+        >
+          <img
+            src={logoImg}
+            alt="Logo Right"
+            className={`h-8 w-8 sm:h-10 sm:w-10 xl:h-11 xl:w-11 select-none object-contain transition-all duration-700 ease-out ${
+              step === 0
+                ? "rotate-0"
+                : "rotate-90 group-hover:scale-110"
+            }`}
+          />
+        </div>
+      </div>
+    </a>
+  )
+}
+
+function StaticLogo({ className = "" }: { className?: string }) {
+  return (
+    <a
+      href="#top"
+      aria-label="Appswayan Home"
+      className={`group inline-flex flex-row items-center justify-center p-0 shrink-0 select-none ${className}`}
+    >
+      <div className="relative inline-flex items-center justify-center">
+        {/* Left Logo Icon */}
+        <div className="flex items-center justify-center shrink-0 -rotate-90">
+          <img
+            src={logoImg}
+            alt="Logo Left"
+            className="h-6 w-6 sm:h-7 sm:w-7 select-none object-contain"
+          />
+        </div>
+
+        {/* Brand Text */}
+        <div className="flex items-center justify-center px-1 sm:px-1.5">
+          <span className="p-0 font-display text-[11px] sm:text-xs font-bold tracking-[0.16em] sm:tracking-[0.18em] text-paper whitespace-nowrap transition-colors group-hover:text-flutter sm:font-extrabold">
+            APPSWAYAN
+          </span>
+        </div>
+
+        {/* Right Logo Icon */}
+        <div className="flex items-center justify-center shrink-0 rotate-90">
+          <img
+            src={logoImg}
+            alt="Logo Right"
+            className="h-6 w-6 sm:h-7 sm:w-7 select-none object-contain"
+          />
+        </div>
+      </div>
     </a>
   )
 }
@@ -122,21 +262,10 @@ function Logo() {
 function Header() {
   const [open, setOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("top")
-  const [visible, setVisible] = useState(true)
-  const lastScrollY = useRef(0)
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
-
-      // Smart hide on scroll down, show on scroll up
-      if (currentScrollY > lastScrollY.current && currentScrollY > 80 && !open) {
-        setVisible(false)
-      } else {
-        setVisible(true)
-      }
-      lastScrollY.current = currentScrollY
-
       const sectionIds = ["top", "services", "why", "projects", "faq", "contact"]
       const scrollPosition = currentScrollY + 220
 
@@ -151,103 +280,139 @@ function Header() {
 
     window.addEventListener("scroll", handleScroll, { passive: true })
     handleScroll()
-    return () => window.removeEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = "unset"
+    }
+    return () => {
+      document.body.style.overflow = "unset"
+    }
   }, [open])
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 border-b border-white/70 ios-glass shadow-xs transition-transform duration-300 ease-in-out ${
-        visible ? "translate-y-0" : "-translate-y-full"
-      }`}
-    >
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-4 py-3 sm:px-6 md:px-8 xl:px-10">
-        <Logo />
+    <>
+      <header className="fixed inset-x-0 top-0 z-50 flex justify-center pointer-events-none px-3 sm:px-5 md:px-6 pt-1.5 sm:pt-2 md:pt-2.5">
+        <div className="pointer-events-auto flex w-full max-w-[1360px] flex-col squircle overflow-hidden ios-glass border border-white/85 shadow-lg shadow-slate-900/5 transition-all">
+          <div className="flex items-center justify-between gap-4 px-4 py-2 sm:px-6 sm:py-2.5">
+            <Logo />
 
-        {/* centered nav with dynamic scroll highlighting */}
-        <nav className="hidden items-center justify-center gap-4 lg:gap-6 xl:gap-8 lg:flex">
-          {NAV.map((item) => {
-            const isActive = activeSection === item.id
-            return (
+            {/* centered nav with dynamic scroll highlighting */}
+            <nav className="hidden items-center justify-center gap-4 lg:gap-6 xl:gap-8 lg:flex">
+              {NAV.map((item) => {
+                const isActive = activeSection === item.id
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className={`text-xs xl:text-[13px] font-bold uppercase tracking-wider transition-colors whitespace-nowrap ${
+                      isActive
+                        ? "text-flutter"
+                        : "text-mist hover:text-flutter"
+                    }`}
+                  >
+                    {item.label}
+                  </a>
+                )
+              })}
+            </nav>
+
+            {/* right CTA button and hamburger */}
+            <div className="flex items-center justify-end gap-2 sm:gap-2.5">
               <a
-                key={item.label}
-                href={item.href}
-                className={`text-xs xl:text-[13px] font-bold uppercase tracking-wider transition-colors whitespace-nowrap ${
-                  isActive
-                    ? "text-flutter"
-                    : "text-mist hover:text-flutter"
-                }`}
+                href="#contact"
+                className="hidden squircle bg-flutter px-3.5 py-1.5 sm:px-4 sm:py-2 xl:px-5 xl:py-2 font-mono text-[11px] xl:text-xs font-semibold uppercase tracking-wider text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-flutter-deep hover:shadow-md md:inline-flex whitespace-nowrap"
               >
-                {item.label}
+                Book Free Consultation
               </a>
-            )
-          })}
-        </nav>
 
-        {/* right CTA button */}
-        <div className="flex items-center justify-end gap-2 sm:gap-3">
-          <a
-            href="#contact"
-            className="hidden squircle bg-flutter px-3.5 py-2 sm:px-4 sm:py-2.5 xl:px-5 xl:py-2.5 font-mono text-[11px] xl:text-xs font-semibold uppercase tracking-wider text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-flutter-deep hover:shadow-md md:inline-flex whitespace-nowrap"
-          >
-            Book Free Consultation
-          </a>
-
-          <button
-            aria-label="Toggle menu"
-            onClick={() => setOpen((v) => !v)}
-            className="grid h-10 w-10 place-items-center rounded-md border border-line lg:hidden"
-          >
-            <div className="space-y-1.5">
-              <span
-                className={`block h-0.5 w-5 bg-paper transition ${
-                  open ? "translate-y-2 rotate-45" : ""
-                }`}
-              />
-              <span
-                className={`block h-0.5 w-5 bg-paper transition ${
-                  open ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`block h-0.5 w-5 bg-paper transition ${
-                  open ? "-translate-y-2 -rotate-45" : ""
-                }`}
-              />
+              <button
+                aria-label="Toggle menu"
+                onClick={() => setOpen((v) => !v)}
+                className="grid h-9 w-9 place-items-center rounded-xl border border-line lg:hidden hover:bg-white/10 active:scale-95 transition-all"
+              >
+                <div className="space-y-1.5">
+                  <span
+                    className={`block h-0.5 w-4 bg-paper transition-transform duration-300 ${
+                      open ? "translate-y-2 rotate-45" : ""
+                    }`}
+                  />
+                  <span
+                    className={`block h-0.5 w-4 bg-paper transition-opacity duration-300 ${
+                      open ? "opacity-0" : ""
+                    }`}
+                  />
+                  <span
+                    className={`block h-0.5 w-4 bg-paper transition-transform duration-300 ${
+                      open ? "-translate-y-2 -rotate-45" : ""
+                    }`}
+                  />
+                </div>
+              </button>
             </div>
-          </button>
-        </div>
-      </div>
-
-      {open && (
-        <div className="border-t border-line/60 ios-glass px-5 py-6 lg:hidden">
-          <div className="grid gap-1">
-            {NAV.map((item) => {
-              const isActive = activeSection === item.id
-              return (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={`flex items-center justify-between border-b border-line/60 py-3 font-display text-lg font-bold uppercase tracking-wider transition-colors ${
-                    isActive ? "text-flutter" : "text-paper"
-                  }`}
-                >
-                  {item.label}
-                  <span className="font-mono text-xs text-mist">→</span>
-                </a>
-              )
-            })}
           </div>
-          <a
-            href="#contact"
-            onClick={() => setOpen(false)}
-            className="mt-5 block squircle bg-flutter px-5 py-3 text-center font-mono text-xs font-semibold uppercase tracking-wider text-white shadow-sm"
-          >
-            Book Free Consultation
-          </a>
         </div>
+      </header>
+
+      {/* Floating Overlapping Window (Outside & Below the Appbar) */}
+      {open && (
+        <>
+          {/* Backdrop */}
+          <div 
+            onClick={() => setOpen(false)}
+            className="fixed inset-0 z-40 bg-black/35 backdrop-blur-[2px] lg:hidden animate-fade-in"
+          />
+
+          {/* Floating Card Outside & Below Appbar */}
+          <div className="fixed inset-x-3 sm:inset-x-5 top-[64px] sm:top-[72px] md:top-[78px] z-45 mx-auto max-w-[1360px] lg:hidden animate-fade-in pointer-events-auto">
+            <div className="w-full flex flex-col squircle-card ios-glass border border-white/85 shadow-2xl shadow-slate-950/20 p-5 sm:p-6 space-y-4">
+              {/* Navigation Links (No Numbers) */}
+              <div className="flex flex-col py-1 space-y-1">
+                {NAV.map((item) => {
+                  const isActive = activeSection === item.id
+                  return (
+                    <a
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className={`group flex items-center justify-between py-2.5 px-3 rounded-xl transition-all ${
+                        isActive 
+                          ? "text-flutter font-extrabold bg-flutter/10" 
+                          : "text-paper font-bold hover:text-flutter hover:bg-white/40"
+                      }`}
+                    >
+                      <span className="font-display text-base sm:text-lg uppercase tracking-wide">
+                        {item.label}
+                      </span>
+                      <span className={`font-mono text-sm transition-transform group-hover:translate-x-1 ${isActive ? "text-flutter" : "text-mist"}`}>
+                        →
+                      </span>
+                    </a>
+                  )
+                })}
+              </div>
+
+              {/* Bottom Actions inside overlapping window */}
+              <div className="pt-2 border-t border-line/40">
+                <a
+                  href="#contact"
+                  onClick={() => setOpen(false)}
+                  className="block squircle w-full bg-flutter py-3 text-center font-mono text-xs font-bold uppercase tracking-wider text-white shadow-md transition-all hover:bg-flutter-deep"
+                >
+                  Book Free Consultation
+                </a>
+              </div>
+            </div>
+          </div>
+        </>
       )}
-    </header>
+    </>
   )
 }
 
@@ -717,34 +882,22 @@ function Process() {
 /* ---------- icons ---------- */
 
 function WebIcon({ className = "w-4 h-4" }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-      <circle cx="12" cy="12" r="10" />
-      <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-    </svg>
-  )
+  return <img src={webSvg} alt="Web" className={`${className} object-contain`} />
 }
 
 function AppleIcon({ className = "w-4 h-4" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.88c.64-.78 1.08-1.86.96-2.94-.93.04-2.06.62-2.73 1.4-.59.68-1.11 1.77-.97 2.83 1.04.08 2.1-.51 2.74-1.29z" />
-    </svg>
-  )
+  return <img src={appleSvg} alt="App Store" className={`${className} object-contain`} />
 }
 
 function PlayStoreIcon({ className = "w-4 h-4" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M3.609 1.814L13.793 12 3.61 22.186a2.372 2.372 0 0 1-.61-.912V2.726c.15-.362.36-.682.61-.912zm11.256 11.258l2.502-2.502-12.72-7.344 10.218 9.846zm0 1.856L4.647 24.774l12.72-7.344-2.502-2.502zm1.072-1.072l3.41-1.968c1.144-.66 1.144-1.74 0-2.4l-3.41-1.968-2.146 2.146 2.146 2.19z" />
-    </svg>
-  )
+  return <img src={androidSvg} alt="Play Store" className={`${className} object-contain`} />
 }
 
 /* ---------- projects ---------- */
 
 const PROJECTS = [
   {
+    slug: "pinpoint",
     name: "PINPOINT",
     title: "PINPOINT – FIND PEOPLE & THINGS, EFFORTLESSLY",
     webUrl: "https://pinpointconnect.app",
@@ -758,19 +911,21 @@ const PROJECTS = [
     tags: ["Flutter", "Maps & Geo", "WebSockets", "iOS & Android"],
   },
   {
+    slug: "atoon",
     name: "ATOON",
-    title: "ATOON – NEXT-GEN ANIMATION STREAMING",
-    webUrl: "https://atoon.tv",
+    title: "ATOON – NEXT-GEN ANIMATION & SOUND STREAMING",
+    webUrl: "https://atoon.app",
     iosUrl: "#contact",
     androidUrl: "#contact",
     deliverables:
       "Custom HLS Video Player, On-Device AI Recommendations, In-App Subscriptions, Offline Downloads",
-    industry: "Media / Streaming Entertainment",
-    desc: "Cross-platform animation streaming app featuring adaptive bitrate playback, personalized AI recommendations, and offline downloads.",
+    industry: "Social Networking / Music Streaming",
+    desc: "Cross-platform wellness & streaming app featuring somatic emotion quadrant maps, lossless audio, and transparent in-app trial flows.",
     img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=1000&h=700&fit=crop&auto=format",
-    tags: ["Flutter", "Video Player", "AI Recommendations", "Subscriptions"],
+    tags: ["Flutter", "Audio Engine", "Firebase", "RevenueCat"],
   },
   {
+    slug: "al-hind",
     name: "Al-Hind Institute",
     title: "AL-HIND – INTERACTIVE LEARNING ECOSYSTEM",
     webUrl: "https://alhindinstitute.edu",
@@ -784,6 +939,7 @@ const PROJECTS = [
     tags: ["Flutter", "LMS & Video", "Payments", "Offline Sync"],
   },
   {
+    slug: "facemax",
     name: "FaceMax",
     title: "FACEMAX – ON-DEVICE AI DERMATOLOGY & SKINCARE",
     webUrl: "https://facemax.ai",
@@ -797,6 +953,7 @@ const PROJECTS = [
     tags: ["Flutter", "ML & Vision", "Camera", "Subscriptions"],
   },
   {
+    slug: "ladakh-tempo",
     name: "Ladakh Tempo",
     title: "LADAKH TEMPO – HIGH-ALTITUDE FLEET & TOUR BOOKING",
     webUrl: "https://ladakhtempo.com",
@@ -811,7 +968,7 @@ const PROJECTS = [
   },
 ]
 
-function Projects() {
+function Projects({ onOpenProject }: { onOpenProject?: (slug: string) => void }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const [translateX, setTranslateX] = useState(0)
@@ -879,7 +1036,7 @@ function Projects() {
 
   return (
     <section id="projects" ref={containerRef} className="relative h-[450vh] bg-ink-2">
-      <div className="sticky top-0 flex h-[100dvh] w-full flex-col justify-between overflow-hidden border-t border-line px-5 pb-4 pt-16 sm:pt-20 md:px-10 md:pb-6 md:pt-24 lg:pt-28 select-none">
+      <div className="sticky top-0 flex h-[100dvh] w-full flex-col justify-between overflow-hidden border-t border-line px-5 pb-6 pt-20 md:px-10 md:pb-8 md:pt-28 select-none">
         {/* Top Header Row */}
         <div className="mx-auto flex w-full max-w-[1400px] shrink-0 flex-col md:flex-row md:items-end md:justify-between gap-3 sm:gap-4 md:gap-6 mb-2 sm:mb-3">
           <div className="max-w-2xl">
@@ -996,30 +1153,30 @@ function Projects() {
                             href={p.webUrl || "#contact"}
                             target={p.webUrl?.startsWith("http") ? "_blank" : undefined}
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1 sm:gap-1.5 rounded-lg border border-line bg-ink/70 px-1.5 py-0.5 sm:px-2 sm:py-1 font-mono text-[8px] sm:text-[9px] md:text-[10px] font-semibold text-paper shadow-xs transition-all hover:border-flutter hover:bg-flutter/10 hover:text-flutter"
+                            className="inline-flex items-center gap-1 sm:gap-1.5 rounded-lg bg-white text-black px-1.5 py-0.5 sm:px-2 sm:py-1 font-mono text-[8px] sm:text-[9px] md:text-[10px] font-bold shadow-xs transition-all hover:bg-slate-200"
                           >
-                            <WebIcon className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-flutter shrink-0" />
-                            <span>Web</span>
+                            <WebIcon className="h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0" />
+                            <span className="text-black">Web</span>
                           </a>
 
                           <a
                             href={p.iosUrl || "#contact"}
                             target={p.iosUrl?.startsWith("http") ? "_blank" : undefined}
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1 sm:gap-1.5 rounded-lg border border-line bg-ink/70 px-1.5 py-0.5 sm:px-2 sm:py-1 font-mono text-[8px] sm:text-[9px] md:text-[10px] font-semibold text-paper shadow-xs transition-all hover:border-flutter hover:bg-flutter/10 hover:text-flutter"
+                            className="inline-flex items-center gap-1 sm:gap-1.5 rounded-lg bg-white text-black px-1.5 py-0.5 sm:px-2 sm:py-1 font-mono text-[8px] sm:text-[9px] md:text-[10px] font-bold shadow-xs transition-all hover:bg-slate-200"
                           >
-                            <AppleIcon className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-flutter shrink-0" />
-                            <span className="truncate">App Store</span>
+                            <AppleIcon className="h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0" />
+                            <span className="truncate text-black">App Store</span>
                           </a>
 
                           <a
                             href={p.androidUrl || "#contact"}
                             target={p.androidUrl?.startsWith("http") ? "_blank" : undefined}
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1 sm:gap-1.5 rounded-lg border border-line bg-ink/70 px-1.5 py-0.5 sm:px-2 sm:py-1 font-mono text-[8px] sm:text-[9px] md:text-[10px] font-semibold text-paper shadow-xs transition-all hover:border-flutter hover:bg-flutter/10 hover:text-flutter"
+                            className="inline-flex items-center gap-1 sm:gap-1.5 rounded-lg bg-white text-black px-1.5 py-0.5 sm:px-2 sm:py-1 font-mono text-[8px] sm:text-[9px] md:text-[10px] font-bold shadow-xs transition-all hover:bg-slate-200"
                           >
-                            <PlayStoreIcon className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-flutter shrink-0" />
-                            <span className="truncate">Play Store</span>
+                            <PlayStoreIcon className="h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0" />
+                            <span className="truncate text-black">Play Store</span>
                           </a>
                         </div>
                       </div>
@@ -1032,12 +1189,12 @@ function Projects() {
                       </div>
 
                       <div className="min-w-0 flex items-center">
-                        <a
-                          href="#contact"
-                          className="squircle inline-flex items-center justify-center bg-flutter px-3 py-1 sm:px-3.5 sm:py-1.5 font-mono text-[8.5px] sm:text-[9px] md:text-[10px] font-semibold uppercase tracking-wider text-white shadow-sm transition-all hover:bg-flutter-deep hover:shadow-md shrink-0 whitespace-nowrap"
+                        <button
+                          onClick={() => onOpenProject?.(p.slug || "atoon")}
+                          className="squircle inline-flex items-center justify-center bg-flutter px-3 py-1 sm:px-3.5 sm:py-1.5 font-mono text-[8.5px] sm:text-[9px] md:text-[10px] font-semibold uppercase tracking-wider text-white shadow-sm transition-all hover:bg-flutter-deep hover:shadow-md shrink-0 whitespace-nowrap cursor-pointer"
                         >
-                          View Details
-                        </a>
+                          View Details →
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -1518,28 +1675,28 @@ function Contact() {
 function Footer() {
   return (
     <footer className="border-t border-line bg-ink">
-      <div className="mx-auto max-w-[1400px] px-5 py-16 md:px-10 md:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_2fr] items-start">
-          {/* Brand Column */}
-          <div className="flex flex-col items-center text-center max-w-sm mx-auto lg:mx-0">
-            <div className="flex justify-center w-full">
-              <Logo />
+      <div className="mx-auto max-w-[1400px] px-5 py-12 md:px-10 md:py-14">
+        <div className="grid gap-8 sm:gap-10 lg:grid-cols-[210px_1fr] xl:grid-cols-[230px_1fr] items-start">
+          {/* Brand Column (Reduced width & compact logo) */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left max-w-[210px] sm:max-w-[230px] mx-auto lg:mx-0">
+            <div className="flex justify-center lg:justify-start w-full">
+              <StaticLogo className="justify-center lg:justify-start" />
             </div>
-            <p className="mt-4 text-xs sm:text-sm leading-relaxed text-mist text-center">
+            <p className="mt-2.5 text-[10px] sm:text-[11px] leading-relaxed text-mist text-center lg:text-left">
               AI-powered Flutter apps that go live fast. Built by a senior, remote-first team.
             </p>
           </div>
 
           {/* Parallel Pairs: [Product & Services] and [Contact Info & Social] */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-10">
             {/* Pair 1: Product & Services parallel */}
-            <div className="grid grid-cols-2 gap-6 sm:gap-8">
+            <div className="grid grid-cols-2 gap-5 sm:gap-6">
               {/* Product Column */}
               <div>
-                <div className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-flutter">
+                <div className="font-mono text-[9.5px] sm:text-[10.5px] font-bold uppercase tracking-[0.2em] text-flutter">
                   Product
                 </div>
-                <ul className="mt-4 space-y-2.5 sm:space-y-3">
+                <ul className="mt-2.5 space-y-1.5 sm:space-y-2">
                   {[
                     { label: "Home", href: "#top" },
                     { label: "Why Us", href: "#why" },
@@ -1550,7 +1707,7 @@ function Footer() {
                     <li key={item.label}>
                       <a
                         href={item.href}
-                        className="text-xs sm:text-sm text-mist transition-colors hover:text-paper"
+                        className="text-[10px] sm:text-[11px] text-mist transition-colors hover:text-paper"
                       >
                         {item.label}
                       </a>
@@ -1561,10 +1718,10 @@ function Footer() {
 
               {/* Services Column */}
               <div>
-                <div className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-flutter">
+                <div className="font-mono text-[9.5px] sm:text-[10.5px] font-bold uppercase tracking-[0.2em] text-flutter">
                   Services
                 </div>
-                <ul className="mt-4 space-y-2.5 sm:space-y-3">
+                <ul className="mt-2.5 space-y-1.5 sm:space-y-2">
                   {[
                     "Flutter Development",
                     "UX/ UI Design",
@@ -1575,7 +1732,7 @@ function Footer() {
                     <li key={s}>
                       <a
                         href="#services"
-                        className="text-xs sm:text-sm text-mist transition-colors hover:text-paper"
+                        className="text-[10px] sm:text-[11px] text-mist transition-colors hover:text-paper"
                       >
                         {s}
                       </a>
@@ -1586,55 +1743,70 @@ function Footer() {
             </div>
 
             {/* Pair 2: Contact Info & Social parallel */}
-            <div className="grid grid-cols-2 gap-6 sm:gap-8">
+            <div className="grid grid-cols-2 gap-5 sm:gap-6">
               {/* Contact Info Column */}
               <div>
-                <div className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-flutter">
+                <div className="font-mono text-[9.5px] sm:text-[10.5px] font-bold uppercase tracking-[0.2em] text-flutter">
                   Contact Info
                 </div>
-                <ul className="mt-4 space-y-2.5 sm:space-y-3">
+                <ul className="mt-2.5 space-y-1.5 sm:space-y-2">
                   <li>
                     <a
                       href="tel:+919754352051"
-                      className="text-xs sm:text-sm text-mist transition-colors hover:text-paper font-medium"
+                      className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] text-mist transition-colors hover:text-paper font-medium"
                     >
-                      +91 9754352051
+                      <span className="flex h-4 w-4 items-center justify-center rounded-full bg-white shrink-0">
+                        <img src={phoneSvg} alt="Phone" className="h-2.5 w-2.5 object-contain" />
+                      </span>
+                      <span>+91 9754352051</span>
                     </a>
                   </li>
                   <li>
                     <a
                       href="mailto:info@flutteryourway.com"
-                      className="text-xs sm:text-sm text-mist transition-colors hover:text-paper break-all"
+                      className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] text-mist transition-colors hover:text-paper break-all font-medium"
                     >
-                      info@flutteryourway.com
+                      <span className="flex h-4 w-4 items-center justify-center rounded-full bg-white shrink-0">
+                        <img src={mailSvg} alt="Email" className="h-2.5 w-2.5 object-contain" />
+                      </span>
+                      <span>info@flutteryourway.com</span>
                     </a>
                   </li>
-                  <li className="text-xs sm:text-sm text-mist leading-relaxed">
-                    Working remotely worldwide
+                  <li className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] text-mist leading-relaxed font-medium">
+                    <span className="flex h-4 w-4 items-center justify-center rounded-full bg-white shrink-0">
+                      <img src={locationSvg} alt="Location" className="h-2.5 w-2.5 object-contain" />
+                    </span>
+                    <span>Working remotely worldwide</span>
                   </li>
                 </ul>
               </div>
 
-              {/* Social Column */}
+              {/* Social Column with crisp black SVG icons */}
               <div>
-                <div className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-flutter">
+                <div className="font-mono text-[9.5px] sm:text-[10.5px] font-bold uppercase tracking-[0.2em] text-flutter">
                   Social
                 </div>
-                <ul className="mt-4 space-y-2.5 sm:space-y-3">
+                <ul className="mt-2.5 space-y-1.5 sm:space-y-2">
                   {[
-                    { name: "Linkedin", url: "https://www.linkedin.com/company/flutter-your-way" },
-                    { name: "Twitter ( X )", url: "https://x.com/flutteryourway" },
-                    { name: "Instagram", url: "https://www.instagram.com/flutteryourway" },
+                    { name: "LinkedIn", url: "https://www.linkedin.com/company/flutter-your-way", icon: linkedinSvg },
+                    { name: "Twitter / X", url: "https://x.com/flutteryourway", icon: twitterSvg },
+                    { name: "Instagram", url: "https://www.instagram.com/flutteryourway", icon: instaSvg },
+                    { name: "Behance", url: "https://www.behance.net", icon: behanceSvg },
+                    { name: "Pinterest", url: "https://www.pinterest.com", icon: pinterestSvg },
+                    { name: "Reddit", url: "https://www.reddit.com", icon: redditSvg },
                   ].map((s) => (
                     <li key={s.name}>
                       <a
                         href={s.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-1 text-xs sm:text-sm text-mist transition-colors hover:text-paper"
+                        className="group inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] text-mist transition-colors hover:text-paper"
                       >
+                        <span className="flex h-4 w-4 items-center justify-center rounded-full bg-white transition-transform group-hover:scale-110 shrink-0">
+                          <img src={s.icon} alt={s.name} className="h-2.5 w-2.5 object-contain" />
+                        </span>
                         <span>{s.name}</span>
-                        <span className="text-mist/40 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-flutter">
+                        <span className="text-mist/40 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-flutter text-[8.5px]">
                           ↗
                         </span>
                       </a>
@@ -1672,6 +1844,78 @@ function Footer() {
 /* ---------- app ---------- */
 
 export default function App() {
+  const [selectedProjectSlug, setSelectedProjectSlug] = useState<string | null>(null)
+  const homeScrollPos = useRef<number>(0)
+
+  // Listen to hash changes (e.g. #projects/pinpoint) and browser popstate (Back button)
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash
+      if (hash.startsWith("#projects/") || hash.startsWith("#project/")) {
+        const slug = hash.replace("#projects/", "").replace("#project/", "")
+        if (CASE_STUDIES[slug]) {
+          setSelectedProjectSlug(slug)
+          window.scrollTo({ top: 0, behavior: "instant" })
+          return
+        }
+      }
+
+      // If user navigated back to Home, close project and restore exact scroll position
+      setSelectedProjectSlug(null)
+      if (homeScrollPos.current > 0) {
+        setTimeout(() => {
+          window.scrollTo({ top: homeScrollPos.current, behavior: "instant" })
+        }, 20)
+      }
+    }
+
+    handleHash()
+    window.addEventListener("hashchange", handleHash)
+    window.addEventListener("popstate", handleHash)
+    return () => {
+      window.removeEventListener("hashchange", handleHash)
+      window.removeEventListener("popstate", handleHash)
+    }
+  }, [])
+
+  const handleOpenProject = (slug: string) => {
+    // Save current scroll position on the home page before opening project
+    homeScrollPos.current = window.scrollY
+    setSelectedProjectSlug(slug)
+    window.location.hash = `projects/${slug}`
+    window.scrollTo({ top: 0, behavior: "instant" })
+  }
+
+  const handleBackToProjects = () => {
+    setSelectedProjectSlug(null)
+    // Clean hash from URL without reloading
+    if (window.location.hash.startsWith("#projects/")) {
+      window.history.pushState(null, "", window.location.pathname + window.location.search)
+    }
+    setTimeout(() => {
+      window.scrollTo({ top: homeScrollPos.current, behavior: "instant" })
+    }, 20)
+  }
+
+  const handleTrackEvent = (eventName: string, meta?: Record<string, any>) => {
+    console.log(`[CaseStudy Analytics] ${eventName}`, meta)
+  }
+
+  if (selectedProjectSlug && CASE_STUDIES[selectedProjectSlug]) {
+    return (
+      <div className="min-h-full w-full bg-ink text-paper">
+        <Header />
+        <ProjectDetailPageTemplate
+          project={CASE_STUDIES[selectedProjectSlug]}
+          onBack={handleBackToProjects}
+          onSelectProject={handleOpenProject}
+          onTrackEvent={handleTrackEvent}
+        />
+        <Footer />
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-full w-full bg-ink text-paper">
       <Header />
@@ -1680,7 +1924,7 @@ export default function App() {
         <Services />
         <WhyUs />
         <Process />
-        <Projects />
+        <Projects onOpenProject={handleOpenProject} />
         <Testimonials />
         <FAQ />
         <Contact />
