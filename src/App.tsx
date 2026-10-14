@@ -311,7 +311,7 @@ function Header() {
                   <a
                     key={item.label}
                     href={item.href}
-                    className={`text-xs xl:text-[13px] font-bold uppercase tracking-wider transition-colors whitespace-nowrap ${
+                    className={`text-xs xl:text-[13px] font-normal uppercase tracking-wider transition-colors whitespace-nowrap ${
                       isActive
                         ? "text-flutter"
                         : "text-mist hover:text-flutter"
@@ -327,7 +327,7 @@ function Header() {
             <div className="flex items-center justify-end gap-2 sm:gap-2.5">
               <a
                 href="#contact"
-                className="hidden squircle bg-flutter px-3.5 py-1.5 sm:px-4 sm:py-2 xl:px-5 xl:py-2 font-mono text-[11px] xl:text-xs font-semibold uppercase tracking-wider text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-flutter-deep hover:shadow-md md:inline-flex whitespace-nowrap"
+                className="hidden squircle bg-flutter px-3.5 py-1.5 sm:px-4 sm:py-2 xl:px-5 xl:py-2 font-mono text-[11px] xl:text-xs font-normal uppercase tracking-wider text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-flutter-deep hover:shadow-md md:inline-flex whitespace-nowrap"
               >
                 Book Free Consultation
               </a>
@@ -383,8 +383,8 @@ function Header() {
                       onClick={() => setOpen(false)}
                       className={`group flex items-center justify-between py-2.5 px-3 rounded-xl transition-all ${
                         isActive 
-                          ? "text-flutter font-extrabold bg-flutter/10" 
-                          : "text-paper font-bold hover:text-flutter hover:bg-white/40"
+                          ? "text-flutter font-normal bg-flutter/10" 
+                          : "text-paper font-normal hover:text-flutter hover:bg-white/40"
                       }`}
                     >
                       <span className="font-display text-base sm:text-lg uppercase tracking-wide">
@@ -403,7 +403,7 @@ function Header() {
                 <a
                   href="#contact"
                   onClick={() => setOpen(false)}
-                  className="block squircle w-full bg-flutter py-3 text-center font-mono text-xs font-bold uppercase tracking-wider text-white shadow-md transition-all hover:bg-flutter-deep"
+                  className="block squircle w-full bg-flutter py-3 text-center font-mono text-xs font-normal uppercase tracking-wider text-white shadow-md transition-all hover:bg-flutter-deep"
                 >
                   Book Free Consultation
                 </a>
@@ -535,13 +535,13 @@ function Hero() {
           <div className="flex shrink-0 flex-col items-stretch sm:flex-row sm:items-center justify-center gap-2.5 px-2 sm:gap-3 sm:px-0">
             <a
               href="#projects"
-              className="squircle bg-panel px-4 py-2.5 text-center font-mono text-[11px] font-semibold uppercase tracking-wider text-paper shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md sm:px-5 sm:py-2.5 sm:text-xs md:px-6 md:py-3 whitespace-nowrap"
+              className="squircle bg-panel px-4 py-2.5 text-center font-mono text-[11px] font-normal uppercase tracking-wider text-paper shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md sm:px-5 sm:py-2.5 sm:text-xs md:px-6 md:py-3 whitespace-nowrap"
             >
               View Portfolio
             </a>
             <a
               href="#contact"
-              className="squircle bg-flutter px-4 py-2.5 text-center font-mono text-[11px] font-semibold uppercase tracking-wider text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-flutter-deep hover:shadow-md sm:px-5 sm:py-2.5 sm:text-xs md:px-6 md:py-3 whitespace-nowrap"
+              className="squircle bg-flutter px-4 py-2.5 text-center font-mono text-[11px] font-normal uppercase tracking-wider text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-flutter-deep hover:shadow-md sm:px-5 sm:py-2.5 sm:text-xs md:px-6 md:py-3 whitespace-nowrap"
             >
               Get a Quote
             </a>
@@ -559,7 +559,7 @@ function Hero() {
       {/* Angled running trusted companies separator between Hero and 2nd section */}
       <div className="relative z-30 -mt-8 w-[120vw] -ml-[10vw] origin-center -rotate-[3.5deg] border-y border-line bg-panel pb-3.5 pt-2.5 shadow-sm sm:-mt-10 sm:pb-4 sm:pt-3 md:-mt-14 md:pb-5 md:pt-3.5">
         <div className="mb-2.5 text-center sm:mb-3">
-          <span className="font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-mist sm:text-xs">
+          <span className="font-mono text-[11px] font-normal uppercase tracking-[0.28em] text-mist sm:text-xs">
             Companies trusted us
           </span>
         </div>
@@ -859,7 +859,7 @@ function Process() {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-3.5 sm:p-4">
-                <span className="squircle inline-flex w-full items-center justify-center gap-2 bg-flutter px-4 py-2.5 sm:py-3 text-center font-mono text-xs font-semibold uppercase tracking-wider text-white shadow-lg transition-all group-hover:bg-flutter-deep group-hover:shadow-xl">
+                <span className="squircle inline-flex w-full items-center justify-center gap-2 bg-flutter px-4 py-2.5 sm:py-3 text-center font-mono text-xs font-normal uppercase tracking-wider text-white shadow-lg transition-all group-hover:bg-flutter-deep group-hover:shadow-xl">
                   Book Free Consultation →
                 </span>
               </div>
@@ -1057,7 +1057,7 @@ function Projects({ onOpenProject }: { onOpenProject?: (slug: string) => void })
           {/* Progress Indicator & CTA: below summary on phone, right-aligned on desktop */}
           <div className="flex w-full md:w-auto items-center justify-between md:justify-end gap-3 sm:gap-6 shrink-0 pb-1">
             <div className="flex items-center gap-2 sm:gap-3">
-              <span className="font-mono text-[10px] sm:text-xs text-mist font-semibold">
+              <span className="font-mono text-[10px] sm:text-xs text-mist font-normal">
                 {Math.min(
                   PROJECTS.length,
                   Math.floor(progress * PROJECTS.length) + 1
@@ -1076,7 +1076,7 @@ function Projects({ onOpenProject }: { onOpenProject?: (slug: string) => void })
 
             <a
               href="#contact"
-              className="squircle bg-flutter px-4 py-2 sm:px-5 sm:py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-flutter-deep hover:shadow-md whitespace-nowrap"
+              className="squircle bg-flutter px-4 py-2 sm:px-5 sm:py-2.5 font-mono text-xs font-normal uppercase tracking-wider text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-flutter-deep hover:shadow-md whitespace-nowrap"
             >
               Start yours →
             </a>
@@ -1128,7 +1128,7 @@ function Projects({ onOpenProject }: { onOpenProject?: (slug: string) => void })
                       </h3>
 
                       {/* Industry below title without label */}
-                      <p className="mt-1 font-mono text-[8.5px] sm:text-[9.5px] md:text-[10px] lg:text-[11px] uppercase tracking-wider text-flutter font-semibold">
+                      <p className="mt-1 font-mono text-[8.5px] sm:text-[9.5px] md:text-[10px] lg:text-[11px] uppercase tracking-wider text-flutter font-normal">
                         {p.industry}
                       </p>
                     </div>
@@ -1136,7 +1136,7 @@ function Projects({ onOpenProject }: { onOpenProject?: (slug: string) => void })
                     {/* Deliverables (Left) & Live on (Right) strictly in a row */}
                     <div className="grid grid-cols-2 gap-2.5 sm:gap-4 md:gap-5 items-start border-t border-line/50 pt-2 sm:pt-2.5">
                       <div className="min-w-0">
-                        <span className="font-mono text-[8.5px] sm:text-[9px] md:text-[10px] uppercase tracking-wider text-mist block font-semibold">
+                        <span className="font-mono text-[8.5px] sm:text-[9px] md:text-[10px] uppercase tracking-wider text-mist block font-normal">
                           Deliverables:
                         </span>
                         <span className="mt-1 block text-[9px] sm:text-[10px] md:text-[11px] text-mist leading-relaxed line-clamp-3 sm:line-clamp-4">
@@ -1145,7 +1145,7 @@ function Projects({ onOpenProject }: { onOpenProject?: (slug: string) => void })
                       </div>
 
                       <div className="min-w-0">
-                        <span className="font-mono text-[8.5px] sm:text-[9px] md:text-[10px] uppercase tracking-wider text-mist block font-semibold">
+                        <span className="font-mono text-[8.5px] sm:text-[9px] md:text-[10px] uppercase tracking-wider text-mist block font-normal">
                           Live on:
                         </span>
                         <div className="mt-1.5 flex flex-wrap items-center gap-1 sm:gap-1.5 md:gap-2">
@@ -1153,7 +1153,7 @@ function Projects({ onOpenProject }: { onOpenProject?: (slug: string) => void })
                             href={p.webUrl || "#contact"}
                             target={p.webUrl?.startsWith("http") ? "_blank" : undefined}
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1 sm:gap-1.5 rounded-lg bg-white text-black px-1.5 py-0.5 sm:px-2 sm:py-1 font-mono text-[8px] sm:text-[9px] md:text-[10px] font-bold shadow-xs transition-all hover:bg-slate-200"
+                            className="inline-flex items-center gap-1 sm:gap-1.5 rounded-lg bg-white text-black px-1.5 py-0.5 sm:px-2 sm:py-1 font-mono text-[8px] sm:text-[9px] md:text-[10px] font-normal shadow-xs transition-all hover:bg-slate-200"
                           >
                             <WebIcon className="h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0" />
                             <span className="text-black">Web</span>
@@ -1163,7 +1163,7 @@ function Projects({ onOpenProject }: { onOpenProject?: (slug: string) => void })
                             href={p.iosUrl || "#contact"}
                             target={p.iosUrl?.startsWith("http") ? "_blank" : undefined}
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1 sm:gap-1.5 rounded-lg bg-white text-black px-1.5 py-0.5 sm:px-2 sm:py-1 font-mono text-[8px] sm:text-[9px] md:text-[10px] font-bold shadow-xs transition-all hover:bg-slate-200"
+                            className="inline-flex items-center gap-1 sm:gap-1.5 rounded-lg bg-white text-black px-1.5 py-0.5 sm:px-2 sm:py-1 font-mono text-[8px] sm:text-[9px] md:text-[10px] font-normal shadow-xs transition-all hover:bg-slate-200"
                           >
                             <AppleIcon className="h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0" />
                             <span className="truncate text-black">App Store</span>
@@ -1173,7 +1173,7 @@ function Projects({ onOpenProject }: { onOpenProject?: (slug: string) => void })
                             href={p.androidUrl || "#contact"}
                             target={p.androidUrl?.startsWith("http") ? "_blank" : undefined}
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1 sm:gap-1.5 rounded-lg bg-white text-black px-1.5 py-0.5 sm:px-2 sm:py-1 font-mono text-[8px] sm:text-[9px] md:text-[10px] font-bold shadow-xs transition-all hover:bg-slate-200"
+                            className="inline-flex items-center gap-1 sm:gap-1.5 rounded-lg bg-white text-black px-1.5 py-0.5 sm:px-2 sm:py-1 font-mono text-[8px] sm:text-[9px] md:text-[10px] font-normal shadow-xs transition-all hover:bg-slate-200"
                           >
                             <PlayStoreIcon className="h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0" />
                             <span className="truncate text-black">Play Store</span>
@@ -1191,7 +1191,7 @@ function Projects({ onOpenProject }: { onOpenProject?: (slug: string) => void })
                       <div className="min-w-0 flex items-center">
                         <button
                           onClick={() => onOpenProject?.(p.slug || "atoon")}
-                          className="squircle inline-flex items-center justify-center bg-flutter px-3 py-1 sm:px-3.5 sm:py-1.5 font-mono text-[8.5px] sm:text-[9px] md:text-[10px] font-semibold uppercase tracking-wider text-white shadow-sm transition-all hover:bg-flutter-deep hover:shadow-md shrink-0 whitespace-nowrap cursor-pointer"
+                          className="squircle inline-flex items-center justify-center bg-flutter px-3 py-1 sm:px-3.5 sm:py-1.5 font-mono text-[8.5px] sm:text-[9px] md:text-[10px] font-normal uppercase tracking-wider text-white shadow-sm transition-all hover:bg-flutter-deep hover:shadow-md shrink-0 whitespace-nowrap cursor-pointer"
                         >
                           View Details →
                         </button>
@@ -1463,7 +1463,7 @@ function Contact() {
                 onClick={() => {
                   document.getElementById("contact-name")?.focus()
                 }}
-                className="inline-flex squircle bg-flutter px-5 sm:px-7 py-3 sm:py-3.5 font-mono text-xs font-semibold uppercase tracking-wider text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-flutter-deep hover:shadow-md whitespace-nowrap"
+                className="inline-flex squircle bg-flutter px-5 sm:px-7 py-3 sm:py-3.5 font-mono text-xs font-normal uppercase tracking-wider text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-flutter-deep hover:shadow-md whitespace-nowrap"
               >
                 Book Free Consultation
               </a>
@@ -1481,7 +1481,7 @@ function Contact() {
               ["03", "Receive a tailored development plan"],
             ].map(([step, text]) => (
               <div key={step} className="relative z-10 flex items-center gap-3.5 sm:gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-line bg-panel font-mono text-xs font-bold text-paper shadow-sm">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-line bg-panel font-mono text-xs font-normal text-paper shadow-sm">
                   {step}
                 </div>
                 <span className="font-display text-xs sm:text-sm md:text-base font-semibold text-paper">
@@ -1507,7 +1507,7 @@ function Contact() {
             <div className="mt-5 sm:mt-6 space-y-3 sm:space-y-3.5">
               {/* WhatsApp */}
               <a
-                href="https://wa.me/919754352051"
+                href="https://wa.me/919003721105"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group ios-glass flex items-center gap-3.5 sm:gap-4 rounded-2xl p-3 sm:p-3.5 transition-all hover:border-flutter hover:bg-white/85"
@@ -1518,18 +1518,18 @@ function Contact() {
                   </svg>
                 </div>
                 <div className="min-w-0">
-                  <div className="font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-mist">
+                  <div className="font-mono text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-mist">
                     WhatsApp
                   </div>
-                  <div className="text-xs sm:text-sm md:text-base font-bold text-paper transition-colors group-hover:text-flutter truncate">
-                    +91 9754352051
+                  <div className="text-xs sm:text-sm md:text-base font-normal text-paper transition-colors group-hover:text-flutter truncate">
+                    +91 9003721105
                   </div>
                 </div>
               </a>
 
               {/* Phone */}
               <a
-                href="tel:+919754352051"
+                href="tel:+919003721105"
                 className="group ios-glass flex items-center gap-3.5 sm:gap-4 rounded-2xl p-3 sm:p-3.5 transition-all hover:border-flutter hover:bg-white/85"
               >
                 <div className="grid h-10 w-10 sm:h-11 sm:w-11 shrink-0 place-items-center rounded-xl border border-line bg-panel text-paper transition-colors group-hover:border-flutter/50 group-hover:text-flutter">
@@ -1539,18 +1539,18 @@ function Contact() {
                   </svg>
                 </div>
                 <div className="min-w-0">
-                  <div className="font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-mist">
+                  <div className="font-mono text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-mist">
                     Phone
                   </div>
-                  <div className="text-xs sm:text-sm md:text-base font-bold text-paper transition-colors group-hover:text-flutter truncate">
-                    +91 9754352051
+                  <div className="text-xs sm:text-sm md:text-base font-normal text-paper transition-colors group-hover:text-flutter truncate">
+                    +91 9003721105
                   </div>
                 </div>
               </a>
 
               {/* Email */}
               <a
-                href="mailto:info@flutteryourway.com"
+                href="mailto:info@appswayan.com"
                 className="group ios-glass flex items-center gap-3.5 sm:gap-4 rounded-2xl p-3 sm:p-3.5 transition-all hover:border-flutter hover:bg-white/85"
               >
                 <div className="grid h-10 w-10 sm:h-11 sm:w-11 shrink-0 place-items-center rounded-xl border border-line bg-panel text-paper transition-colors group-hover:border-flutter/50 group-hover:text-flutter">
@@ -1560,11 +1560,11 @@ function Contact() {
                   </svg>
                 </div>
                 <div className="min-w-0">
-                  <div className="font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-mist">
+                  <div className="font-mono text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-mist">
                     Email
                   </div>
-                  <div className="text-xs sm:text-sm md:text-base font-bold text-paper transition-colors group-hover:text-flutter truncate">
-                    info@flutteryourway.com
+                  <div className="text-xs sm:text-sm md:text-base font-normal text-paper transition-colors group-hover:text-flutter truncate">
+                    info@appswayan.com
                   </div>
                 </div>
               </a>
@@ -1578,10 +1578,10 @@ function Contact() {
                   </svg>
                 </div>
                 <div className="min-w-0">
-                  <div className="font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-mist">
+                  <div className="font-mono text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-mist">
                     Location
                   </div>
-                  <div className="text-xs sm:text-sm md:text-base font-bold text-paper truncate">
+                  <div className="text-xs sm:text-sm md:text-base font-normal text-paper truncate">
                     Working remotely worldwide
                   </div>
                 </div>
@@ -1605,7 +1605,7 @@ function Contact() {
                 className="mt-5 sm:mt-6 space-y-3.5 sm:space-y-4"
               >
                 <div>
-                  <label htmlFor="contact-name" className="block font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-mist">
+                  <label htmlFor="contact-name" className="block font-mono text-[10px] sm:text-xs font-normal uppercase tracking-wider text-mist">
                     Your Name *
                   </label>
                   <input
@@ -1618,7 +1618,7 @@ function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="contact-company" className="block font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-mist">
+                  <label htmlFor="contact-company" className="block font-mono text-[10px] sm:text-xs font-normal uppercase tracking-wider text-mist">
                     Company Name
                   </label>
                   <input
@@ -1630,7 +1630,7 @@ function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="contact-email" className="block font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-mist">
+                  <label htmlFor="contact-email" className="block font-mono text-[10px] sm:text-xs font-normal uppercase tracking-wider text-mist">
                     Your Email *
                   </label>
                   <input
@@ -1643,7 +1643,7 @@ function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="contact-message" className="block font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-mist">
+                  <label htmlFor="contact-message" className="block font-mono text-[10px] sm:text-xs font-normal uppercase tracking-wider text-mist">
                     Project Details *
                   </label>
                   <textarea
@@ -1657,7 +1657,7 @@ function Contact() {
 
                 <button
                   type="submit"
-                  className="squircle w-full bg-flutter py-3 sm:py-3.5 font-mono text-xs font-semibold uppercase tracking-wider text-white shadow-sm transition-all hover:bg-flutter-deep hover:shadow-md cursor-pointer"
+                  className="squircle w-full bg-flutter py-3 sm:py-3.5 font-mono text-xs font-normal uppercase tracking-wider text-white shadow-sm transition-all hover:bg-flutter-deep hover:shadow-md cursor-pointer"
                 >
                   Send Message →
                 </button>
@@ -1693,7 +1693,7 @@ function Footer() {
             <div className="grid grid-cols-2 gap-5 sm:gap-6">
               {/* Product Column */}
               <div>
-                <div className="font-mono text-[9.5px] sm:text-[10.5px] font-bold uppercase tracking-[0.2em] text-flutter">
+                <div className="font-mono text-[9.5px] sm:text-[10.5px] font-normal uppercase tracking-[0.2em] text-flutter">
                   Product
                 </div>
                 <ul className="mt-2.5 space-y-1.5 sm:space-y-2">
@@ -1718,7 +1718,7 @@ function Footer() {
 
               {/* Services Column */}
               <div>
-                <div className="font-mono text-[9.5px] sm:text-[10.5px] font-bold uppercase tracking-[0.2em] text-flutter">
+                <div className="font-mono text-[9.5px] sm:text-[10.5px] font-normal uppercase tracking-[0.2em] text-flutter">
                   Services
                 </div>
                 <ul className="mt-2.5 space-y-1.5 sm:space-y-2">
@@ -1746,30 +1746,30 @@ function Footer() {
             <div className="grid grid-cols-2 gap-5 sm:gap-6">
               {/* Contact Info Column */}
               <div>
-                <div className="font-mono text-[9.5px] sm:text-[10.5px] font-bold uppercase tracking-[0.2em] text-flutter">
+                <div className="font-mono text-[9.5px] sm:text-[10.5px] font-normal uppercase tracking-[0.2em] text-flutter">
                   Contact Info
                 </div>
                 <ul className="mt-2.5 space-y-1.5 sm:space-y-2">
                   <li>
                     <a
-                      href="tel:+919754352051"
+                      href="tel:+919003721105"
                       className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] text-mist transition-colors hover:text-paper font-medium"
                     >
                       <span className="flex h-4 w-4 items-center justify-center rounded-full bg-white shrink-0">
                         <img src={phoneSvg} alt="Phone" className="h-2.5 w-2.5 object-contain" />
                       </span>
-                      <span>+91 9754352051</span>
+                      <span>+91 9003721105</span>
                     </a>
                   </li>
                   <li>
                     <a
-                      href="mailto:info@flutteryourway.com"
+                      href="mailto:info@appswayan.com"
                       className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] text-mist transition-colors hover:text-paper break-all font-medium"
                     >
                       <span className="flex h-4 w-4 items-center justify-center rounded-full bg-white shrink-0">
                         <img src={mailSvg} alt="Email" className="h-2.5 w-2.5 object-contain" />
                       </span>
-                      <span>info@flutteryourway.com</span>
+                      <span>info@appswayan.com</span>
                     </a>
                   </li>
                   <li className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] text-mist leading-relaxed font-medium">
@@ -1783,14 +1783,14 @@ function Footer() {
 
               {/* Social Column with crisp black SVG icons */}
               <div>
-                <div className="font-mono text-[9.5px] sm:text-[10.5px] font-bold uppercase tracking-[0.2em] text-flutter">
+                <div className="font-mono text-[9.5px] sm:text-[10.5px] font-normal uppercase tracking-[0.2em] text-flutter">
                   Social
                 </div>
                 <ul className="mt-2.5 space-y-1.5 sm:space-y-2">
                   {[
-                    { name: "LinkedIn", url: "https://www.linkedin.com/company/flutter-your-way", icon: linkedinSvg },
-                    { name: "Twitter / X", url: "https://x.com/flutteryourway", icon: twitterSvg },
-                    { name: "Instagram", url: "https://www.instagram.com/flutteryourway", icon: instaSvg },
+                    { name: "LinkedIn", url: "https://www.linkedin.com", icon: linkedinSvg },
+                    { name: "Twitter / X", url: "https://x.com", icon: twitterSvg },
+                    { name: "Instagram", url: "https://www.instagram.com", icon: instaSvg },
                     { name: "Behance", url: "https://www.behance.net", icon: behanceSvg },
                     { name: "Pinterest", url: "https://www.pinterest.com", icon: pinterestSvg },
                     { name: "Reddit", url: "https://www.reddit.com", icon: redditSvg },
@@ -1829,7 +1829,7 @@ function Footer() {
           <div className="flex w-full justify-end">
             <a
               href="#top"
-              className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-line bg-panel/80 px-3.5 py-1.5 font-mono text-xs font-semibold text-flutter hover:border-flutter hover:bg-flutter/10 hover:text-white transition-all shadow-xs"
+              className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-line bg-panel/80 px-3.5 py-1.5 font-mono text-xs font-normal text-flutter hover:border-flutter hover:bg-flutter/10 hover:text-white transition-all shadow-xs"
             >
               <span>Back to top</span>
               <span>↑</span>

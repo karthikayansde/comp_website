@@ -207,7 +207,7 @@ export default function ProjectDetailPageTemplate({
               onBack()
               track("click_back_to_projects_nav")
             }}
-            className="inline-flex items-center gap-1 rounded-full border border-line bg-panel/70 px-2.5 py-1 font-mono text-[10px] sm:text-xs font-semibold text-flutter hover:border-flutter hover:bg-flutter/10 hover:text-white transition-all cursor-pointer shrink-0"
+            className="inline-flex items-center gap-1 rounded-full border border-line bg-panel/70 px-2.5 py-1 font-mono text-[10px] sm:text-xs font-normal text-flutter hover:border-flutter hover:bg-flutter/10 hover:text-white transition-all cursor-pointer shrink-0"
           >
             ← Back
           </button>
@@ -242,7 +242,7 @@ export default function ProjectDetailPageTemplate({
                       }
                       track("click_anchor_nav", { section: item.id })
                     }}
-                    className={`rounded-full px-2.5 py-1 font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer ${
+                    className={`rounded-full px-2.5 py-1 font-mono text-[10px] sm:text-[11px] font-normal uppercase tracking-wider transition-all whitespace-nowrap cursor-pointer ${
                       isActive
                         ? "bg-flutter text-white shadow-xs"
                         : "text-mist hover:text-paper hover:bg-white/10"
@@ -275,7 +275,7 @@ export default function ProjectDetailPageTemplate({
             >
               Home
             </a>
-            <span className="text-mist/50 font-bold">&gt;</span>
+            <span className="text-mist/50 font-normal">&gt;</span>
             <a
               href="#projects"
               onClick={(e) => {
@@ -286,8 +286,8 @@ export default function ProjectDetailPageTemplate({
             >
               Projects
             </a>
-            <span className="text-mist/50 font-bold">&gt;</span>
-            <span className="font-bold text-paper uppercase tracking-wider truncate">
+            <span className="text-mist/50 font-normal">&gt;</span>
+            <span className="font-normal text-paper uppercase tracking-wider truncate">
               {project.projectName}
             </span>
           </nav>
@@ -338,7 +338,7 @@ export default function ProjectDetailPageTemplate({
                 <div className="font-mono text-[10px] sm:text-[11px] font-medium uppercase tracking-wider text-mist">
                   Client
                 </div>
-                <div className="font-sans text-xs sm:text-sm font-semibold text-paper leading-snug">
+                <div className="font-sans text-xs sm:text-sm font-normal text-paper leading-snug">
                   {project.client}
                 </div>
               </div>
@@ -348,7 +348,7 @@ export default function ProjectDetailPageTemplate({
                 <div className="font-mono text-[10px] sm:text-[11px] font-medium uppercase tracking-wider text-mist">
                   Industry
                 </div>
-                <div className="font-sans text-xs sm:text-sm font-semibold text-paper leading-snug">
+                <div className="font-sans text-xs sm:text-sm font-normal text-paper leading-snug">
                   {project.industry}
                 </div>
               </div>
@@ -366,7 +366,7 @@ export default function ProjectDetailPageTemplate({
                     return (
                       <span
                         key={p}
-                        className="inline-flex items-center gap-1.5 rounded-lg bg-white text-black px-2 py-0.5 font-mono text-[10px] sm:text-[11px] font-semibold shadow-xs border border-white/60"
+                        className="inline-flex items-center gap-1.5 rounded-lg bg-white text-black px-2 py-0.5 font-mono text-[10px] sm:text-[11px] font-normal shadow-xs border border-white/60"
                       >
                         {isApple && <img src={appleSvg} alt="" className="h-3.5 w-3.5 object-contain" />}
                         {isAndroid && <img src={androidSvg} alt="" className="h-3.5 w-3.5 object-contain" />}
@@ -383,7 +383,7 @@ export default function ProjectDetailPageTemplate({
                 <div className="font-mono text-[10px] sm:text-[11px] font-medium uppercase tracking-wider text-mist">
                   Region
                 </div>
-                <div className="flex items-center gap-1.5 font-sans text-xs sm:text-sm font-semibold text-paper">
+                <div className="flex items-center gap-1.5 font-sans text-xs sm:text-sm font-normal text-paper">
                   <span className="flex h-4 w-4 items-center justify-center rounded-full bg-white shrink-0">
                     <img src={locationSvg} alt="" className="h-2.5 w-2.5 object-contain" />
                   </span>
@@ -396,14 +396,14 @@ export default function ProjectDetailPageTemplate({
                 <div className="font-mono text-[10px] sm:text-[11px] font-medium uppercase tracking-wider text-mist">
                   Timeline
                 </div>
-                <div className="font-sans text-xs sm:text-sm font-semibold text-paper leading-snug">
+                <div className="font-sans text-xs sm:text-sm font-normal text-paper leading-snug">
                   {project.duration}
                 </div>
               </div>
 
               {/* Deliverables tags subrow (Center Aligned) */}
               <div className="col-span-2 sm:col-span-3 lg:col-span-5 pt-3 border-t border-line/40 flex flex-wrap items-center justify-center gap-2 text-center">
-                <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-flutter font-semibold mr-1">
+                <span className="font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-flutter font-normal mr-1">
                   Deliverables:
                 </span>
                 {project.deliverables.map((deliv) => (
@@ -516,7 +516,7 @@ export default function ProjectDetailPageTemplate({
                 <RevealCard key={group.layer} delay={idx * 90} className="h-full">
                   <div className="ios-glass-card squircle-card p-5 sm:p-6 space-y-3.5 border border-white/85 shadow-sm h-full">
                     <div className="flex items-center justify-between border-b border-line/60 pb-3">
-                      <span className="font-mono text-xs font-bold uppercase tracking-wider text-flutter">
+                      <span className="font-mono text-xs font-normal uppercase tracking-wider text-flutter">
                         {group.layer}
                       </span>
                       <span className="font-mono text-[10px] text-mist">
@@ -528,7 +528,7 @@ export default function ProjectDetailPageTemplate({
                       {group.technologies.map((tech) => (
                         <span
                           key={tech.name}
-                          className="inline-flex items-center gap-1.5 rounded-xl border border-line bg-panel/70 px-2.5 py-1 font-mono text-[11px] sm:text-xs font-semibold text-paper shadow-xs"
+                          className="inline-flex items-center gap-1.5 rounded-xl border border-line bg-panel/70 px-2.5 py-1 font-mono text-[11px] sm:text-xs font-normal text-paper shadow-xs"
                         >
                           <span className="h-1.5 w-1.5 rounded-full bg-flutter" />
                           {tech.name}
@@ -604,7 +604,7 @@ export default function ProjectDetailPageTemplate({
                         alt={item.alt || `Screenshot ${idx + 1}`}
                         className="w-full h-full object-cover object-center pointer-events-none transition-transform duration-500 group-hover:scale-102"
                       />
-                      <span className="absolute top-3 left-3 rounded-lg bg-black/60 backdrop-blur-md px-2.5 py-1 font-mono text-[10px] sm:text-[11px] font-bold text-white border border-white/20">
+                      <span className="absolute top-3 left-3 rounded-lg bg-black/60 backdrop-blur-md px-2.5 py-1 font-mono text-[10px] sm:text-[11px] font-normal text-white border border-white/20">
                         {idx + 1} / {project.screenshots.length}
                       </span>
                     </div>
@@ -648,7 +648,7 @@ export default function ProjectDetailPageTemplate({
                     {/* Pair Header */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 border-b border-line/60 pb-3.5">
                       <div className="flex items-center gap-3">
-                        <span className="inline-flex items-center justify-center min-w-[36px] h-8 px-2.5 rounded-xl bg-flutter/10 border border-flutter/25 font-mono text-xs font-bold text-flutter shrink-0 shadow-xs">
+                        <span className="inline-flex items-center justify-center min-w-[36px] h-8 px-2.5 rounded-xl bg-flutter/10 border border-flutter/25 font-mono text-xs font-normal text-flutter shrink-0 shadow-xs">
                           #{idx + 1}
                         </span>
                         <h3 className="font-display text-sm sm:text-base md:text-lg font-bold uppercase tracking-tight text-paper">
@@ -656,7 +656,7 @@ export default function ProjectDetailPageTemplate({
                         </h3>
                       </div>
                       {item.tag && (
-                        <span className="rounded-md bg-white/10 px-2.5 py-0.5 font-mono text-[10px] sm:text-[11px] font-semibold text-mist uppercase tracking-wider w-fit">
+                        <span className="rounded-md bg-white/10 px-2.5 py-0.5 font-mono text-[10px] sm:text-[11px] font-normal text-mist uppercase tracking-wider w-fit">
                           {item.tag}
                         </span>
                       )}
@@ -667,7 +667,7 @@ export default function ProjectDetailPageTemplate({
                       {/* Problem Block */}
                       <div className="rounded-2xl border border-red-500/20 bg-red-500/5 p-4 sm:p-5 space-y-2 flex flex-col justify-between">
                         <div className="space-y-1.5">
-                          <div className="flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-wider text-red-400">
+                          <div className="flex items-center gap-1.5 font-mono text-[11px] font-normal uppercase tracking-wider text-red-400">
                             <span>⚠️</span>
                             <span>The Challenge</span>
                           </div>
@@ -680,7 +680,7 @@ export default function ProjectDetailPageTemplate({
                       {/* Solution Block */}
                       <div className="rounded-2xl border border-flutter/30 bg-flutter/5 p-4 sm:p-5 space-y-2 flex flex-col justify-between">
                         <div className="space-y-1.5">
-                          <div className="flex items-center gap-1.5 font-mono text-[11px] font-bold uppercase tracking-wider text-flutter">
+                          <div className="flex items-center gap-1.5 font-mono text-[11px] font-normal uppercase tracking-wider text-flutter">
                             <span>⚡</span>
                             <span>Engineered Solution</span>
                           </div>
@@ -730,7 +730,7 @@ export default function ProjectDetailPageTemplate({
                     }, 50)
                     track("click_cta_button")
                   }}
-                  className="squircle inline-flex items-center justify-center bg-flutter px-7 py-3 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-sm hover:bg-flutter-deep transition-all cursor-pointer"
+                  className="squircle inline-flex items-center justify-center bg-flutter px-7 py-3 font-mono text-xs font-normal uppercase tracking-wider text-white shadow-sm hover:bg-flutter-deep transition-all cursor-pointer"
                 >
                   Book Free Consultation
                 </button>
@@ -774,10 +774,10 @@ export default function ProjectDetailPageTemplate({
                     <div className="ios-glass-card squircle-card p-5 sm:p-6 space-y-3 border border-white/85 shadow-sm transition-all flex flex-col justify-between group h-full">
                       <div className="space-y-2.5">
                         <div className="flex items-center justify-between gap-2">
-                          <span className="inline-flex items-center justify-center min-w-[34px] h-6 px-2 rounded-xl bg-flutter/10 border border-flutter/25 font-mono text-[11px] font-bold text-flutter shadow-xs">
+                          <span className="inline-flex items-center justify-center min-w-[34px] h-6 px-2 rounded-xl bg-flutter/10 border border-flutter/25 font-mono text-[11px] font-normal text-flutter shadow-xs">
                             #{step.number}
                           </span>
-                          <span className="rounded-md bg-panel/70 border border-line px-2 py-0.5 font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-flutter">
+                          <span className="rounded-md bg-panel/70 border border-line px-2 py-0.5 font-mono text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-flutter">
                             {phaseLabel}
                           </span>
                         </div>
@@ -858,7 +858,7 @@ export default function ProjectDetailPageTemplate({
               {/* Before Column */}
               <RevealCard delay={80}>
                 <div className="rounded-3xl border border-red-500/20 bg-red-500/5 p-5 sm:p-7 space-y-3.5 h-full">
-                  <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-red-400 border-b border-red-500/20 pb-2.5">
+                  <div className="flex items-center gap-2 font-mono text-xs font-normal uppercase tracking-wider text-red-400 border-b border-red-500/20 pb-2.5">
                     <span>✕</span>
                     <span>{project.beforeAfter.beforeTitle || "Pre-Engagement State"}</span>
                   </div>
@@ -876,7 +876,7 @@ export default function ProjectDetailPageTemplate({
               {/* After Column */}
               <RevealCard delay={180}>
                 <div className="rounded-3xl border border-flutter/30 bg-flutter/5 p-5 sm:p-7 space-y-3.5 h-full">
-                  <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-flutter border-b border-flutter/20 pb-2.5">
+                  <div className="flex items-center gap-2 font-mono text-xs font-normal uppercase tracking-wider text-flutter border-b border-flutter/20 pb-2.5">
                     <span>✓</span>
                     <span>{project.beforeAfter.afterTitle || "Post-Launch Result"}</span>
                   </div>
@@ -914,7 +914,7 @@ export default function ProjectDetailPageTemplate({
                           className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover border border-line ring-2 ring-flutter/20 shrink-0"
                         />
                       ) : (
-                        <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-flutter/10 border border-flutter/20 text-flutter font-mono font-bold text-sm shrink-0">
+                        <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-flutter/10 border border-flutter/20 text-flutter font-mono font-normal text-sm shrink-0">
                           {project.testimonial.name.slice(0, 2).toUpperCase()}
                         </div>
                       )}
@@ -966,10 +966,10 @@ export default function ProjectDetailPageTemplate({
                 className="group flex items-center justify-between squircle bg-flutter px-5 py-3.5 shadow-sm hover:bg-flutter-deep transition-all cursor-pointer w-full text-left"
               >
                 <div>
-                  <div className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-white/80">
+                  <div className="font-mono text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-white/80">
                     Ready to build?
                   </div>
-                  <div className="font-display text-sm sm:text-base font-extrabold uppercase tracking-tight text-white">
+                  <div className="font-display text-sm sm:text-base font-medium uppercase tracking-tight text-white">
                     Start Yours
                   </div>
                 </div>
@@ -989,10 +989,10 @@ export default function ProjectDetailPageTemplate({
                   className="group flex items-center justify-between squircle ios-glass px-5 py-3.5 border border-white/85 shadow-sm hover:border-flutter/50 hover:bg-white/95 transition-all cursor-pointer w-full text-left"
                 >
                   <div className="min-w-0 pr-2">
-                    <div className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-mist group-hover:text-flutter transition-colors">
+                    <div className="font-mono text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-mist group-hover:text-flutter transition-colors">
                       Next Project
                     </div>
-                    <div className="font-display text-sm sm:text-base font-extrabold uppercase tracking-tight text-paper truncate">
+                    <div className="font-display text-sm sm:text-base font-medium uppercase tracking-tight text-paper truncate">
                       {nextProject.projectName}
                     </div>
                   </div>
@@ -1010,10 +1010,10 @@ export default function ProjectDetailPageTemplate({
                   className="group flex items-center justify-between squircle ios-glass px-5 py-3.5 border border-white/85 shadow-sm hover:border-flutter/50 hover:bg-white/95 transition-all cursor-pointer w-full text-left"
                 >
                   <div>
-                    <div className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-mist">
+                    <div className="font-mono text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-mist">
                       Portfolio
                     </div>
-                    <div className="font-display text-sm sm:text-base font-extrabold uppercase tracking-tight text-paper">
+                    <div className="font-display text-sm sm:text-base font-medium uppercase tracking-tight text-paper">
                       All Projects
                     </div>
                   </div>

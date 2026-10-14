@@ -28,7 +28,7 @@ export default function ProjectCaseStudy({
           <div className="flex items-center gap-3">
             <button
               onClick={onBack}
-              className="inline-flex items-center gap-1.5 rounded-full border border-line bg-panel/70 px-3 py-1.5 font-mono text-xs font-semibold text-flutter hover:border-flutter hover:bg-flutter/10 hover:text-white transition-all active:scale-95 shadow-xs cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-line bg-panel/70 px-3 py-1.5 font-mono text-xs font-normal text-flutter hover:border-flutter hover:bg-flutter/10 hover:text-white transition-all active:scale-95 shadow-xs cursor-pointer"
             >
               <span>←</span>
               <span>All Projects</span>
@@ -53,7 +53,7 @@ export default function ProjectCaseStudy({
             )}
             <a
               href="#contact"
-              className="squircle bg-flutter px-3.5 py-1.5 sm:px-4 sm:py-2 font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-white shadow-sm transition-all hover:bg-flutter-deep hover:shadow-md"
+              className="squircle bg-flutter px-3.5 py-1.5 sm:px-4 sm:py-2 font-mono text-[11px] sm:text-xs font-normal uppercase tracking-wider text-white shadow-sm transition-all hover:bg-flutter-deep hover:shadow-md"
             >
               Build Similar App
             </a>
@@ -116,7 +116,7 @@ export default function ProjectCaseStudy({
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-between text-xs font-mono font-semibold text-flutter hover:underline"
+                  className="inline-flex items-center justify-between text-xs font-mono font-normal text-flutter hover:underline"
                 >
                   <span>{project.liveUrl.replace("https://", "")}</span>
                   <span>↗</span>
@@ -139,7 +139,7 @@ export default function ProjectCaseStudy({
                 {project.techStack.map((tech) => (
                   <span
                     key={tech}
-                    className="inline-block rounded-md bg-flutter/10 border border-flutter/20 px-2 py-0.5 font-mono text-[10px] font-semibold text-flutter"
+                    className="inline-block rounded-md bg-flutter/10 border border-flutter/20 px-2 py-0.5 font-mono text-[10px] font-normal text-flutter"
                   >
                     {tech}
                   </span>
@@ -157,7 +157,7 @@ export default function ProjectCaseStudy({
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left Mockup Info */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-flutter/40 bg-flutter/10 px-3 py-1 font-mono text-xs font-semibold text-flutter">
+              <div className="inline-flex items-center gap-2 rounded-full border border-flutter/40 bg-flutter/10 px-3 py-1 font-mono text-xs font-normal text-flutter">
                 <span className="h-2 w-2 rounded-full bg-flutter animate-pulse" />
                 Live Acoustic Experience
               </div>
@@ -184,11 +184,11 @@ export default function ProjectCaseStudy({
                       )}
                     </button>
                     <div>
-                      <div className="text-xs font-bold text-paper">Deep Resonance (432Hz)</div>
+                      <div className="text-xs font-normal text-paper">Deep Resonance (432Hz)</div>
                       <div className="text-[10px] font-mono text-mist">Composed by Atoon Studio</div>
                     </div>
                   </div>
-                  <span className="font-mono text-xs text-flutter font-semibold">
+                  <span className="font-mono text-xs text-flutter font-normal">
                     {playingAudio ? "03:42 / 12:00" : "Preview"}
                   </span>
                 </div>
@@ -221,7 +221,7 @@ export default function ProjectCaseStudy({
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink via-ink/60 to-transparent p-6 pt-12">
                   <div className="flex items-center justify-between">
                     <div>
-                      <span className="font-mono text-[10px] uppercase tracking-wider text-flutter font-semibold">
+                      <span className="font-mono text-[10px] uppercase tracking-wider text-flutter font-normal">
                         Somatic 2D Map
                       </span>
                       <h4 className="font-display text-base font-bold text-paper">
@@ -254,7 +254,7 @@ export default function ProjectCaseStudy({
                 className="ios-glass-card rounded-2xl p-6 sm:p-8 space-y-4 hover:-translate-y-1 transition-all"
               >
                 <div className="flex items-center justify-between">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-flutter/10 border border-flutter/20 font-mono text-sm font-bold text-flutter">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-flutter/10 border border-flutter/20 font-mono text-sm font-normal text-flutter">
                     0{idx + 1}
                   </span>
                   <span className="font-mono text-[11px] uppercase tracking-wider text-mist">
@@ -288,7 +288,7 @@ export default function ProjectCaseStudy({
                 <button
                   key={cat.title}
                   onClick={() => setActiveCategoryIndex(idx)}
-                  className={`rounded-xl px-3.5 py-2 font-mono text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+                  className={`rounded-xl px-3.5 py-2 font-mono text-xs font-normal uppercase tracking-wider transition-all cursor-pointer ${
                     activeCategoryIndex === idx
                       ? "bg-flutter text-white shadow-md"
                       : "bg-panel/70 text-mist hover:text-paper border border-line"
@@ -311,7 +311,7 @@ export default function ProjectCaseStudy({
                   <p className="text-xs sm:text-sm text-mist">{activeCategory.description}</p>
                 )}
               </div>
-              <span className="font-mono text-xs text-flutter font-semibold">
+              <span className="font-mono text-xs text-flutter font-normal">
                 {activeCategory.screens.length} Dedicated Screens
               </span>
             </div>
@@ -324,7 +324,7 @@ export default function ProjectCaseStudy({
                   className="rounded-2xl border border-line bg-panel/40 p-4 space-y-2 hover:border-flutter/40 hover:bg-panel transition-all"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-mono text-[10px] font-bold text-flutter">
+                    <span className="font-mono text-[10px] font-normal text-flutter">
                       SCREEN {sIdx + 1}
                     </span>
                     <span className="h-2 w-2 rounded-full bg-flutter" />
@@ -361,7 +361,7 @@ export default function ProjectCaseStudy({
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-line pb-4">
                   <div className="flex items-center gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-flutter/10 border border-flutter/20 font-mono text-xs font-bold text-flutter">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-flutter/10 border border-flutter/20 font-mono text-xs font-normal text-flutter">
                       #{idx + 1}
                     </span>
                     <h3 className="font-display text-lg sm:text-xl font-bold uppercase tracking-tight text-paper">
@@ -379,7 +379,7 @@ export default function ProjectCaseStudy({
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   {/* Problem Card */}
                   <div className="rounded-2xl border border-red-500/20 bg-red-500/5 p-5 space-y-2">
-                    <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-red-400">
+                    <div className="flex items-center gap-2 font-mono text-xs font-normal uppercase tracking-wider text-red-400">
                       <span>⚠️</span>
                       <span>The Challenge</span>
                     </div>
@@ -390,7 +390,7 @@ export default function ProjectCaseStudy({
 
                   {/* Solution Card */}
                   <div className="rounded-2xl border border-flutter/30 bg-flutter/5 p-5 space-y-2">
-                    <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-flutter">
+                    <div className="flex items-center gap-2 font-mono text-xs font-normal uppercase tracking-wider text-flutter">
                       <span>⚡</span>
                       <span>Engineered Solution</span>
                     </div>
@@ -450,7 +450,7 @@ export default function ProjectCaseStudy({
                 key={p.step}
                 className="ios-glass-card rounded-2xl p-6 space-y-3 hover:-translate-y-1 transition-all"
               >
-                <div className="font-mono text-sm font-bold text-flutter">{p.step} / PHASE</div>
+                <div className="font-mono text-sm font-normal text-flutter">{p.step} / PHASE</div>
                 <h3 className="font-display text-lg font-bold uppercase tracking-tight text-paper">
                   {p.title}
                 </h3>
@@ -522,14 +522,14 @@ export default function ProjectCaseStudy({
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
               href="#contact"
-              className="squircle bg-flutter px-6 py-3.5 font-mono text-xs font-bold uppercase tracking-wider text-white shadow-lg hover:bg-flutter-deep transition-all"
+              className="squircle bg-flutter px-6 py-3.5 font-mono text-xs font-normal uppercase tracking-wider text-white shadow-lg hover:bg-flutter-deep transition-all"
             >
               Book Free Consultation
             </a>
             {project.nextProjectSlug && (
               <button
                 onClick={() => onSelectProject(project.nextProjectSlug!)}
-                className="inline-flex items-center gap-2 rounded-full border border-line bg-panel/70 px-6 py-3.5 font-mono text-xs font-semibold text-paper hover:text-flutter hover:border-flutter transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-panel/70 px-6 py-3.5 font-mono text-xs font-normal text-paper hover:text-flutter hover:border-flutter transition-all cursor-pointer"
               >
                 <span>Next Case Study: {project.nextProjectTitle || "Next Project"}</span>
                 <span>→</span>

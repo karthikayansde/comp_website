@@ -230,7 +230,7 @@ export const CASE_STUDIES: Record<string, CaseStudyProject> = {
     // 11. Client Testimonial
     testimonial: {
       quote:
-        "We've been working with Flutter Your Way for over six months now, and we've been thrilled. We are first-time founders creating our MVP, and Flutter Your Way has been an incredible engineering partner in executing our vision, educating us on the development lifecycle, and communicating every milestone. They helped us launch a world-class MVP in record time.",
+        "We've been working with the team for over six months now, and we've been thrilled. We are first-time founders creating our MVP, and they have been an incredible engineering partner in executing our vision, educating us on the development lifecycle, and communicating every milestone. They helped us launch a world-class MVP in record time.",
       name: "Matthew West",
       role: "Co-Founder & CEO",
       company: "Atoon LLC",
